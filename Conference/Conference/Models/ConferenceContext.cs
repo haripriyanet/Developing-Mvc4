@@ -21,7 +21,9 @@ namespace Conference.Models
             modelBuilder.Entity<Session>().Property(t => t.Abstract).IsRequired();
             modelBuilder.Entity<Session>().Property(t => t.Abstract)
                 .HasColumnType("MultilineText");
-
+            modelBuilder.Entity<Speaker>().Property(t => t.EmailAddress)
+                .HasColumnType("EmailAddress");
+            ;
         }
         
     }
