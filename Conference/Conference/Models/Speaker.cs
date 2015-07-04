@@ -12,8 +12,7 @@ namespace Conference.Models
         public int SpeakerId { get; set; }
         [Display(Name="Speaker")]
         public string Name { get; set; }
+        [Display(Name="Email")]
         public string EmailAddress { get; set; }
-        public virtual List<Session> Sessions { get; set; }
-
     }
 }

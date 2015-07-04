@@ -23,7 +23,6 @@ namespace Conference.Models
                 .HasColumnType("MultilineText");
             modelBuilder.Entity<Speaker>().Property(t => t.EmailAddress)
                 .HasColumnType("EmailAddress");
-            ;
         }
         
     }
