@@ -18,6 +18,10 @@ namespace Conference.Services
             {
                 sessions = ctx.Sessions.ToList();
             }
+            if (sessions == null)
+            {
+                return null;
+            }
             return sessions;
         }
 
