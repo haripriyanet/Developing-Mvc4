@@ -24,7 +24,7 @@ namespace Conference.Controllers
             return View();
         }
 
-        //  Posr: Session/Create
+        //  Post: Session/Create
         [HttpPost]
         public ActionResult Create(Session session)
         {
