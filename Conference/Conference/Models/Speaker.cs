@@ -12,7 +12,8 @@ namespace Conference.Models
     {
         [Key]
         public int SpeakerId { get; set; }
-        [Display(Name = "Speaker")]
+        [Required(),
+        Display(Name = "Speaker")]
         public string Name { get; set; }
         [DataType(DataType.EmailAddress),
         Display(Name = "Email")]

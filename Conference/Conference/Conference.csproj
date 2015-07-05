@@ -173,6 +173,7 @@
     <Compile Include="Models\Session.cs" />
     <Compile Include="Models\Speaker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\SpeakerService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

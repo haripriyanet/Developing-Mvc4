@@ -7,17 +7,17 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Conference.Models;
+using Conference.Services;
 
 namespace Conference.Controllers
 {
     public class SpeakersController : Controller
     {
-        private ConferenceContext db = new ConferenceContext();
 
         // GET: Speakers
         public ActionResult Index()
         {
-            return View(db.Speakers.ToList());
+            return View(SpeakerService.DisplayAllSpeakers());
         }
 
         // GET: Speakers/Details/5
@@ -27,7 +27,7 @@ namespace Conference.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Speaker speaker = db.Speakers.Find(id);
+            Speaker speaker = SpeakerService.GetSpeaker(id);
             if (speaker == null)
             {
                 return HttpNotFound();
@@ -48,10 +48,9 @@ namespace Conference.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "SpeakerId,Name,EmailAddress")] Speaker speaker)
         {
-            if (ModelState.IsValid)
+            bool valid = SpeakerService.Create(speaker, ModelState);
+            if (valid)
             {
-                db.Speakers.Add(speaker);
-                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -65,7 +64,7 @@ namespace Conference.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Speaker speaker = db.Speakers.Find(id);
+            Speaker speaker = SpeakerService.GetSpeaker(id);
             if (speaker == null)
             {
                 return HttpNotFound();
@@ -80,10 +79,9 @@ namespace Conference.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "SpeakerId,Name,EmailAddress")] Speaker speaker)
         {
-            if (ModelState.IsValid)
+            bool valid = SpeakerService.Create(speaker, ModelState);
+            if (valid)
             {
-                db.Entry(speaker).State = EntityState.Modified;
-                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(speaker);
@@ -96,7 +94,8 @@ namespace Conference.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Speaker speaker = db.Speakers.Find(id);
+            //Speaker speaker = db.Speakers.Find(id);
+            Speaker speaker = SpeakerService.GetSpeaker(id);
             if (speaker == null)
             {
                 return HttpNotFound();
@@ -109,9 +108,7 @@ namespace Conference.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Speaker speaker = db.Speakers.Find(id);
-            db.Speakers.Remove(speaker);
-            db.SaveChanges();
+            SpeakerService.DeleteSpeaker(id);
             return RedirectToAction("Index");
         }
 
@@ -119,7 +116,7 @@ namespace Conference.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+
             }
             base.Dispose(disposing);
         }
