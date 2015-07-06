@@ -19,6 +19,7 @@ namespace Conference.Models
         public string Abstract { get; set; }
         public int SpeakerId { get; set; }
         public virtual Speaker Speaker { get; set; }
+        public virtual List<Comment> Comments { get; set; }
     }
 
 }
