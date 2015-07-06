@@ -21,6 +21,7 @@ namespace Conference.Models
 
         public System.Data.Entity.DbSet<Conference.Models.Speaker> Speakers { get; set; }
         public System.Data.Entity.DbSet<Conference.Models.Session> Sessions { get; set; }
+        public System.Data.Entity.DbSet<Conference.Models.Comment> Comments { get; set; }
     
     }
 }
