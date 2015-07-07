@@ -36,7 +36,7 @@
 
     </dl>
 </div>
-@Html.Action("_GetForSession", "Comment", new {SessionID = Model.SessionId})
+@Html.Action("_GetForSession", "Comments", new {SessionID = Model.SessionId})
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.SessionId }) |
     @Html.ActionLink("Back to List", "Index")

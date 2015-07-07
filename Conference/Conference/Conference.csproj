@@ -246,6 +246,7 @@
     <Content Include="Views\Sessions\Edit.cshtml" />
     <Content Include="Views\Sessions\Index.cshtml" />
     <Content Include="Views\Comments\_GetForSession.cshtml" />
+    <Content Include="Views\Comments\_CommentForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
