@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Conference.Models.Comment>
 
-<div id="comments">
+<div id="commentsPanel">
     <ul>
         @foreach (var comment in Model)
         {
@@ -9,7 +9,7 @@
     </ul>
     @*@using (Html.BeginForm("_Submit", "Comments", FormMethod.Post))*@
     @using (Ajax.BeginForm("_Submit", "Comments",
-        new AjaxOptions { UpdateTargetId = "comments", LoadingElementId = "comments" }))
+        new AjaxOptions { UpdateTargetId = "commentsPanel"}))
     {
         @Html.AntiForgeryToken();
         @Html.Action("_CommentForm", new { SessionId = ViewBag.SessionId })
