@@ -120,6 +120,13 @@ namespace Conference.Controllers
             return RedirectToAction("Index");
         }
 
+        [ChildActionOnly]
+        public PartialViewResult _GetForSpeaker(int speakerId)
+        {
+            List<Session> sessions = db.Sessions.Where(s => s.SpeakerId == speakerId).ToList();
+            return PartialView(sessions);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
