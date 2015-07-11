@@ -1,17 +1,53 @@
 ﻿@model IEnumerable<Conference.Models.Comment>
 
-<div id="commentsPanel">
+@*<div id="commentsPanel">
     <ul>
         @foreach (var comment in Model)
         {
             <li>@comment.Content</li>
         }
     </ul>
-    @*@using (Html.BeginForm("_Submit", "Comments", FormMethod.Post))*@
+    @using (Html.BeginForm("_Submit", "Comments", FormMethod.Post))
     @using (Ajax.BeginForm("_Submit", "Comments",
         new AjaxOptions { UpdateTargetId = "commentsPanel"}))
     {
         @Html.AntiForgeryToken();
         @Html.Action("_CommentForm", new { SessionId = ViewBag.SessionId })
     }
+</div>*@
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
+<script src="~/signalr/Hubs"></script>
+
+<script>
+    $(function ()
+    {
+        var commentHub = $.connection.commentHub;
+        var sessionid = @ViewBag.SessionId;
+        commentHub.client.addNewComment = function (comment)
+        {
+            $("comments-list").append("<li>" + comment + "</li>");
+        };
+        $.connection.hub.start().done(function ()
+        {
+            commentHub.server.register(sessionid);
+            $("#submit").click(function ()
+            {
+                commentHub.server.addComment(sessionid, $("#content").val());
+            });
+        });
+    });
+
+</script>
+
+<ul id="comments-list">
+    @foreach (var comment in Model)
+    {
+        <li>@comment.Content</li>
+    }
+</ul>
+<div>
+    <label for="Content">Content:</label>
+    <input type="text" id="content" value="" />
+    <button type="button" id="submit">Submit Commment</button>
 </div>
